@@ -233,7 +233,7 @@ knitr::include_graphics("figures/chunk-parts.png")
 
 - `echo`: whether or not to display code in knitted output  
 - `eval`: whether or to to run the code in the chunk when knitting  
-- `include`: whether to include anything from the from a code chunk in the output document  
+- `include`: whether to include anything from the code chunk in the output  
 
 ## Setup chunk
 ````markdown
@@ -247,18 +247,16 @@ library(tidyverse)
 - `knitr::opts_chunk$set` sets default options for all chunks.
 
 
-## Inline code
+## Inline code {.build}
 
 Inside your text you can include code with the syntax <span>&#96;</span>r code here&#96;.  
-
 For example, <span>&#96;</span>r 4 + 4&#96; would output `r 4 + 4` in your text.
 
 ```{r, echo = TRUE}
-print(diamonds, n = 5)
+print(head(diamonds, n = 5))
 num_diamonds <- nrow(diamonds)
 ```
 There are <span>&#96;</span>r num_diamonds&#96; rows in the `diamonds` dataset.  
-
 There are `r num_diamonds` rows in the `diamonds` dataset.
 
 ## Code with python {.build}
