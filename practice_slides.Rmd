@@ -1,0 +1,94 @@
+---
+title: "A brief introduction to <br> R Markdown"
+author: "Dr. Lillian Aoki"
+subtitle: "Data Science Initiative | University of Oregon"
+date: "2022-06-09"
+output: 
+  ioslides_presentation:
+    incremental: true
+    widescreen: true
+    highlight: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Intro to R Markdown {.build}
+
+-   What is R Markdown?
+-   Why should I use it?
+-   R Markdown demo
+-   Some real-life use cases
+
+With slides adapted from Ulrik Lyngs\
+<https://github.com/ulyngs/rmarkdown-workshop>
+
+# What is R Markdown?
+
+## Wouldn't it be great if...
+
+-   You could have code, results, and text in the same document?
+-   Your results and plots were automatically generated from your data, so your documents were updated if your data changed?
+-   The file format of your documents was future-proof?
+-   The syntax for this was easy?
+
+# Anatomy of an <br> R Markdown Document
+
+------------------------------------------------------------------------
+
+**R Markdown file = plain text file with extension *.Rmd***
+
+```` {.markdown}
+---
+title: "Diamond sizes"
+date: 2016-08-25
+output: html_document
+---
+`r ''````{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+smaller <- diamonds %>% 
+  filter(carat <= 2.5)
+```
+# Shine bright like a diamond
+We have data about `r knitr::inline_expr("nrow(diamonds)")` diamonds.
+Only `r knitr::inline_expr("nrow(diamonds) - nrow(smaller)")` are larger than 2.5 carats. 
+The distribution of the remainder is shown below:
+`r ''````{r}
+smaller %>% 
+  ggplot(aes(carat)) + 
+  geom_freqpoly(binwidth = 0.01)
+````
+
+---
+**YAML header** 
+
+```` {.markdown}
+---
+title: "Diamond sizes"
+date: 2016-08-25
+output: html_document
+---
+````
+````
+
+---
+**Code chunks**
+```` {.markdown}
+`r ''````{r setup, include=FALSE}
+library(ggplot2)
+library(dplyr)
+smaller <- diamonds %>% 
+  filter(carat <= 2.5)
+```
+````
+---
+**Text (with inline code)**
+```` {.markdown}
+# Shine bright like a diamond
+We have data about `r knitr::inline_expr("nrow(diamonds)")` diamonds.
+Only `r knitr::inline_expr("nrow(diamonds) - nrow(smaller)")` are larger than 2.5 carats. 
+````
+
